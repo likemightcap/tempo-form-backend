@@ -35,7 +35,7 @@ app.post('/contact', async (req, res) => {
     await transporter.sendMail({
       from: `"Mike at TempoPrints" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "Thanks for reaching out to TempoPrints!",
+      subject: "Thanks for reaching out to Tempo Print & Design",
       text: `Thanks for getting in touch — I appreciate you reaching out!
     
     I just wanted to let you know I received your message and I’ll be getting back to you as soon as possible (usually within 1 business day).
