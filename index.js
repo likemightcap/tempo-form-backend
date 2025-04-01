@@ -30,6 +30,29 @@ app.post('/contact', async (req, res) => {
       subject: 'New Contact Form Submission',
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`
     });
+
+    //send autoresponse to sender
+    await transporter.sendMail({
+      from: `"Mike at TempoPrints" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Thanks for reaching out to TempoPrints!",
+      text: `Thanks for getting in touch — I appreciate you reaching out!
+    
+    I just wanted to let you know I received your message and I’ll be getting back to you as soon as possible (usually within 1 business day).
+    
+    If it’s urgent or you’d like to chat sooner, feel free to reply to this email or give me a call.
+    
+    Looking forward to connecting!
+    
+    
+    --
+    Thank You!
+    Mike Lightcap
+    Tempo Print & Design
+    tempoprints.com
+    856.252.0414`
+    });
+    
     
     res.status(200).json({ message: 'Message sent successfully!' });
   } catch (err) {
