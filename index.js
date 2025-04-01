@@ -24,11 +24,13 @@ app.post('/contact', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `${name} <${email}>`,
+      from: `"Contact Form" <${process.env.EMAIL_USER}>`,
+      replyTo: email,
       to: process.env.EMAIL_USER,
       subject: 'New Contact Form Submission',
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`
     });
+    
     res.status(200).json({ message: 'Message sent successfully!' });
   } catch (err) {
     console.error('Error sending email:', err);
