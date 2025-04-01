@@ -33,7 +33,7 @@ app.post('/contact', async (req, res) => {
 
     //send autoresponse to sender
     await transporter.sendMail({
-      from: `"Mike at TempoPrints" <${process.env.EMAIL_USER}>`,
+      from: `"Mike at Tempo Print & Design" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Thanks for reaching out to Tempo Print & Design",
       text: `Thanks for getting in touch — I appreciate you reaching out!
