@@ -61,6 +61,45 @@ app.post('/contact', async (req, res) => {
   }
 });
 
+app.post('/newsletter', async (req, res) => {
+  const { name, email } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    host: 'mail.privateemail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+  });
+
+  try {
+    // Email to you (the business)
+    await transporter.sendMail({
+      from: `"Newsletter Signup" <${process.env.EMAIL_USER}>`,
+      replyTo: email,
+      to: process.env.EMAIL_USER,
+      subject: 'New Newsletter Signup',
+      text: `Name: ${name}\nEmail: ${email}`
+    });
+
+    // Autoresponder to user
+    await transporter.sendMail({
+      from: `"TempoPrints" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "You're signed up for TempoPrints updates!",
+      text: `Hi ${name},\n\nThanks for signing up for updates from TempoPrints! You'll now be the first to hear about our latest postcard drops, local marketing ideas, and small business offers.\n\nYou can unsubscribe anytime by replying to this email.\n\n– Mike`
+    });
+
+    res.status(200).json({ message: 'Newsletter signup successful!' });
+  } catch (err) {
+    console.error('Error handling newsletter signup:', err);
+    res.status(500).json({ message: 'Failed to sign up.' });
+  }
+});
+
+
 app.get('/', (req, res) => {
   res.send('TempoPrints form backend is running.');
 });
