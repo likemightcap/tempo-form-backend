@@ -86,10 +86,33 @@ app.post('/newsletter', async (req, res) => {
 
     // Autoresponder to user
     await transporter.sendMail({
-      from: `"TempoPrints" <${process.env.EMAIL_USER}>`,
+      from: `"Mike at Tempo Print & Design" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "You're signed up for TempoPrints updates!",
-      text: `Hi ${name},\n\nThanks for signing up for updates from TempoPrints! You'll now be the first to hear about our latest postcard drops, local marketing ideas, and small business offers.\n\nYou can unsubscribe anytime by replying to this email.\n\n– Mike`
+      subject: "Here's Your 6-Step Local Growth Blueprint!",
+      text: `Thanks for signing up!
+
+Attached is your free copy of The 6-Step Local Growth Blueprint — a short, practical guide to help you get more customers, stay organized, and grow your local service business with smart marketing strategies that actually work.
+
+Inside the guide, you’ll learn how to:
+• Show up on Google
+• Build a lead-generating website
+• Stay organized with a CRM
+• Advertise locally (like EDDM mailers!)
+• Keep customers coming back 
+• Build a brand your community remembers 
+
+Going forward, you’ll receive my once-a-month Tempo Print & Design newsletter, where I share helpful tips, design insights, and exclusive promos just for local businesses like yours.
+
+No spam. No fluff. Just real value.
+
+If you ever have questions or need help putting this stuff into action, just hit reply — I’d love to help.
+
+--
+Thank You!
+Mike Lightcap
+Tempo Print & Design
+tempoprints.com
+856.252.0414`
     });
 
     res.status(200).json({ message: 'Newsletter signup successful!' });
