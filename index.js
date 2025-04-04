@@ -91,7 +91,10 @@ app.post('/newsletter', async (req, res) => {
       subject: "Here's Your 6-Step Local Growth Blueprint!",
       text: `Thanks for signing up!
 
-Attached is your free copy of The 6-Step Local Growth Blueprint — a short, practical guide to help you get more customers, stay organized, and grow your local service business with smart marketing strategies that actually work.
+Click below to download your free copy of The 6-Step Local Growth Blueprint:
+https://tempoprints.com/assetts/Tempo-6-Step-Growth_Blueprint.pdf
+
+This short, practical guide will help you get more customers, stay organized, and grow your local service business with smart marketing strategies that actually work.
 
 Inside the guide, you’ll learn how to:
 • Show up on Google
