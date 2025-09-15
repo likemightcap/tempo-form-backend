@@ -133,3 +133,47 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+app.post('/mailer-inquiry', async (req, res) => {
+  const { name, company, phone, email } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    host: 'mail.privateemail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+  });
+
+  try {
+    // Email to business (you)
+    await transporter.sendMail({
+      from: `"Mailer Inquiry" <${process.env.EMAIL_USER}>`,
+      replyTo: email,
+      to: process.env.EMAIL_USER,
+      subject: 'New Community Mailer Inquiry',
+      text: `
+        Name: ${name}
+        Company Name: ${company}
+        Phone Number: ${phone}
+        Email: ${email}
+      `
+    });
+
+    // Autoresponder to user
+    await transporter.sendMail({
+      from: `"Mike at Tempo Print & Design" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Thanks for your interest in the Community Mailer!",
+      text: `Hi ${name},\n\nThanks for reaching out about the Tempo Community Mailer. I’ll follow up with you shortly to go over availability and options.\n\nIf you have any questions in the meantime, feel free to reply here.\n\n– Mike\nTempo Print & Design`
+    });
+
+    res.status(200).json({ message: 'Mailer inquiry sent successfully!' });
+  } catch (err) {
+    console.error('Mailer inquiry error:', err);
+    res.status(500).json({ message: 'Failed to send inquiry.' });
+  }
+});
+
