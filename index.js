@@ -92,7 +92,7 @@ app.post('/newsletter', async (req, res) => {
       text: `Thanks for signing up!
 
 Click below to download your free copy of The 6-Step Local Growth Blueprint:
-https://tempoprints.com/assets/Tempo-6-Step-Growth-Blueprint.pdf
+https://tempoprints.com/assets/6-Step-Local-Growth-Blueprint.pdf
 
 This short, practical guide will help you get more customers, stay organized, and grow your local service business with smart marketing strategies that actually work.
 
